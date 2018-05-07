@@ -1,0 +1,17 @@
+{
+  "name": "react-native-loudness",
+  "version": "0.1.0",
+  "description": "React Native Microphone Loudness library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": "Fuchen Chen",
+  "license": "Apache-2.0",
+  "peerDependencies": {
+    "react-native": "^0.41.2"
+  }
+}
