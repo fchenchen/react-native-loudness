@@ -1,5 +1,6 @@
 
 # react-native-loudness
+Read microphone loudness in React Native
 
 ## Getting started
 
@@ -10,7 +11,7 @@
 `$ react-native link react-native-loudness`
 
 ### Manual installation
-
+__THESE STEPS ARE NOT TESTED.__
 
 #### iOS
 
@@ -29,17 +30,35 @@
   	include ':react-native-loudness'
   	project(':react-native-loudness').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-loudness/android')
   	```
-3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
+3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:Â
   	```
       compile project(':react-native-loudness')
   	```
 
+### Required Additional Steps
+
+#### iOS
+1. In `Info.plist`, add `Privacy - Micronphone Usage Description` using XCode.
+
+#### Android
+1. In `AndroidManifest.xml`, add `<uses-permission android:name="android.permission.RECORD_AUDIO" />`.
+
 
 ## Usage
-```javascript
-import RNLoudness from 'react-native-loudness';
+Loudness is in dbFS from -160 to 0, where -160 represents absolute silence and 0 represents the maximum loudness the microphone can sense.
 
-// TODO: What to do with the module?
-RNLoudness;
+```javascript
+import {Loudness} from 'react-native-loudness';
+
+const loudness = new Loudness();
+loudness.start();
+
+loudness.getLoudness((loudness) => {
+  console.log(loudness);
+});
+
+loudness.stop();
 ```
-  
+
+## Example App
+[LoudnessExample](https://github.com/fchenchen/LoudnessExample)
