@@ -1,6 +1,6 @@
 {
   "name": "react-native-loudness",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Read microphone loudness in React Native",
   "main": "index.js",
   "scripts": {
