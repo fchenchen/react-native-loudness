@@ -29,26 +29,13 @@ public class RNLoudnessModule extends ReactContextBaseJavaModule {
   private final ReactApplicationContext reactContext;
 
   private AudioRecord recorder;
-  private int bufferSize;
+  // Instead of setting a min buffersize, set a buffer size for 100ms of data
+  // Buffersize should not be too small
+  private int bufferSize = (int) ((double)RECORDER_SAMPLERATE*0.1); // 44100*0.1;
 
   public RNLoudnessModule(ReactApplicationContext reactContext) {
     super(reactContext);
     this.reactContext = reactContext;
-
-    // Instead of setting a min buffersize, set a buffer size for 100ms of data
-    this.bufferSize = (int) ((double)RECORDER_SAMPLERATE*0.1); // 44100*0.1
-    System.out.println("ReactNativeJs: Buffer size: " + bufferSize);
-    this.recorder = new AudioRecord(RECORDER_SOURCE,
-                                    RECORDER_SAMPLERATE,
-                                    RECORDER_CHANNELS,
-                                    RECORDER_AUDIO_ENCODING,
-                                    this.bufferSize);
-    // Check State
-    if (this.recorder.getState() == AudioRecord.STATE_INITIALIZED){
-      System.out.println("ReactNativeJs: State: Ready");
-    } else {
-      System.out.println("ReactNativeJs: State: Not ready");
-    }
   }
 
   @Override
@@ -58,11 +45,24 @@ public class RNLoudnessModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void start(){
+    this.recorder = new AudioRecord(RECORDER_SOURCE,
+                                    RECORDER_SAMPLERATE,
+                                    RECORDER_CHANNELS,
+                                    RECORDER_AUDIO_ENCODING,
+                                    this.bufferSize);
+    // System.out.println("ReactNativeJs: Buffer size: " + bufferSize);
+    // Check State
+    if (this.recorder.getState() == AudioRecord.STATE_INITIALIZED){
+      // System.out.println("ReactNativeJs: State: Ready");
+    } else {
+      // System.out.println("ReactNativeJs: State: Not ready");
+    }
+
     try{
       this.recorder.startRecording();
-      System.out.println("ReactNativeJs: Start recording");
+      // System.out.println("ReactNativeJs: Start recording");
     } catch(IllegalStateException e){
-      System.out.println("ReactNativeJs: Start recording failed");
+      // System.out.println("ReactNativeJs: Start recording failed");
     }
 
   }
@@ -71,9 +71,9 @@ public class RNLoudnessModule extends ReactContextBaseJavaModule {
   public void stop(){
     try{
       this.recorder.stop();
-      System.out.println("ReactNativeJs: Stop recording");
+      // System.out.println("ReactNativeJs: Stop recording");
     } catch(IllegalStateException e){
-      System.out.println("ReactNativeJs: Stop recording failed");
+      // System.out.println("ReactNativeJs: Stop recording failed");
     }
 
   }
