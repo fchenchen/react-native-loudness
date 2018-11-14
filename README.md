@@ -20,7 +20,7 @@ Read microphone loudness in React Native
 
 
 ## Permission
-For Android, you have to request permission in the code. Please refer to [PermissionsAndroid](https://facebook.github.io/react-native/docs/permissionsandroid) for more details. Example App also demonstrates the permission request process.  
+For Android, you have to request permission in the code. Please refer to [PermissionsAndroid](https://facebook.github.io/react-native/docs/permissionsandroid) for more details. [Example App](https://github.com/fchenchen/LoudnessDisplay) also demonstrates the permission request process in Android. The example App has not been tested on IOS.
 
 ## Usage
 Loudness is in dbFS from -160 to 0, where -160 represents absolute silence and 0 represents the maximum loudness the microphone can sense.
