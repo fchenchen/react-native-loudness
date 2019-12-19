@@ -20,6 +20,7 @@ import java.util.Arrays;
 
 
 public class RNLoudnessModule extends ReactContextBaseJavaModule {
+  private static final int SDK_INT = android.os.Build.VERSION.SDK_INT;
 
   private static final int RECORDER_SOURCE = AudioSource.MIC;
   private static final int RECORDER_SAMPLERATE = 44100;
@@ -82,7 +83,14 @@ public class RNLoudnessModule extends ReactContextBaseJavaModule {
   public void getLoudness(Callback cb) {
     // Read all data
     short[] audioData = new short[this.bufferSize];
-    int r = this.recorder.read(audioData,0,this.bufferSize,AudioRecord.READ_BLOCKING);
+    int r;
+    if (this.SDK_INT < 23){
+      // Assume blocking before SDK 23
+      r = this.recorder.read(audioData,0,this.bufferSize);
+    } else {
+      // readMode parameter is added since SDK 23
+      r = this.recorder.read(audioData,0,this.bufferSize,AudioRecord.READ_BLOCKING);
+    }
     // System.out.println("ReactNativeJs: Read: " + r);
     // System.out.println("ReactNativeJs: Data: " + Arrays.toString(audioData));
     double loudness = calcRMS(audioData);

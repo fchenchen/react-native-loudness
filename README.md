@@ -6,9 +6,9 @@ Read microphone loudness in React Native
 
 `$ npm install react-native-loudness --save`
 
-### Mostly automatic installation
-
 `$ react-native link react-native-loudness`
+
+For RN>0.60, no need to link but please run `pod install` in the project `ios` directory.
 
 ### Required Additional Steps
 
@@ -20,7 +20,7 @@ Read microphone loudness in React Native
 
 
 ## Permission
-For Android, you have to request permission in the code. Please refer to [PermissionsAndroid](https://facebook.github.io/react-native/docs/permissionsandroid) for more details. [Example App](https://github.com/fchenchen/LoudnessDisplay) also demonstrates the permission request process in Android. The example App has not been tested on IOS.
+The app needs to ask permission for microphone usage. If the loudness reading is not a number or is always a fixed number, check the app permission first. For Android 6.0 (API level 23) or later, the permission needs to be asked when running the app. Learn more [here](https://developer.android.com/guide/topics/permissions/overview). For iOS devices, the permission will be automatically asked when needed. It can also be manually asked. Check out [react-native-permissions](https://github.com/react-native-community/react-native-permissions).
 
 ## Usage
 Loudness is in dbFS from -160 to 0, where -160 represents absolute silence and 0 represents the maximum loudness the microphone can sense.
@@ -37,3 +37,6 @@ loudness.getLoudness((loudness) => {
 
 loudness.stop();
 ```
+
+## Example
+There is a simple example project `LoudnessMeter` in the examples folder of this repository.

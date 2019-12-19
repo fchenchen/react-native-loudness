@@ -3,9 +3,9 @@
 
 @implementation RNLoudness
 
-- (dispatch_queue_t)methodQueue
++ (BOOL)requiresMainQueueSetup
 {
-    return dispatch_get_main_queue();
+    return NO;
 }
 
 - (id)init {
