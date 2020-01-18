@@ -1,4 +1,3 @@
-
 #if __has_include("RCTBridgeModule.h")
 #import "RCTBridgeModule.h"
 #else
@@ -9,7 +8,9 @@
 
 
 @interface RNLoudness : NSObject <RCTBridgeModule>{
-  AVAudioRecorder *recorder;
+  AVAudioRecorder* recorder;
+  NSURL* tmpDirURL;
+  NSURL* saveDirURL;
 }
 
 @end

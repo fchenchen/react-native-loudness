@@ -15,7 +15,8 @@
     "native",
     "microphone",
     "loudness",
-    "volume"
+    "volume",
+    "audio"
   ],
   "author": "Fuchen Chen",
   "license": "Apache-2.0"
