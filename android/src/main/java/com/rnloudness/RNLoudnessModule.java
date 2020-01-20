@@ -42,8 +42,10 @@ public class RNLoudnessModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void stop(){
-    recordThread.stopRecording();
-    recordThread = null;
+    if (recordThread != null){
+      recordThread.stopRecording();
+      recordThread = null;
+    }
   }
 
   @ReactMethod
