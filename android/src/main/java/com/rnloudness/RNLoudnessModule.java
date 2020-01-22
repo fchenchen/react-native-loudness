@@ -34,6 +34,12 @@ public class RNLoudnessModule extends ReactContextBaseJavaModule {
     return "RNLoudness";
   }
 
+  @Override
+  public void onCatalystInstanceDestroy() {
+    this.stop();
+    super.onCatalystInstanceDestroy();
+  }
+
   @ReactMethod
   public void start(String fileName){
     recordThread = new RecordThread(fileName, reactContext);
@@ -42,8 +48,10 @@ public class RNLoudnessModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void stop(){
-    recordThread.stopRecording();
-    recordThread = null;
+    if (recordThread != null){
+      recordThread.stopRecording();
+      recordThread = null;
+    }
   }
 
   @ReactMethod
